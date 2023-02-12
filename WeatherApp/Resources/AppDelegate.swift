@@ -10,10 +10,22 @@ import UIKit
 @main
 class AppDelegate: UIResponder, UIApplicationDelegate {
 
-
+    // Window that gets created when app loads app
+    var window: UIWindow?
 
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
         // Override point for customization after application launch.
+        
+        let window = UIWindow(frame: UIScreen.main.bounds)
+        
+        let navVC = UINavigationController(rootViewController: SavedWeathersViewController())
+        navVC.navigationBar.prefersLargeTitles = true
+        navVC.viewControllers.first?.navigationItem.largeTitleDisplayMode = .always
+        window.rootViewController = navVC
+        
+        window.makeKeyAndVisible()
+        self.window = window
+        
         return true
     }
 
