@@ -13,5 +13,10 @@ class SavedWeathersViewController: UIViewController {
         super.viewDidLoad()
         
         title = "Weathers"
-        view.backgroundColor = UIColor(named: "BackgroundColor")    }
+        view.backgroundColor = UIColor(named: "BackgroundColor")
+        
+        NetworkingManager.shared.featchWeatherByCityName(cityName: "Kielce") { weather in
+            print(weather)
+        }
+    }
 }
