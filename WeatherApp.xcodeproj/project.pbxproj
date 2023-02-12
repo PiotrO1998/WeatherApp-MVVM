@@ -16,6 +16,7 @@
 		E385D23529994C3700993556 /* NetworkingManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = E385D23429994C3700993556 /* NetworkingManager.swift */; };
 		E3FA7878299956210046B7D1 /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = E3FA7877299956210046B7D1 /* Constants.swift */; };
 		E3FA787A2999625F0046B7D1 /* WeatherResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = E3FA78792999625F0046B7D1 /* WeatherResponse.swift */; };
+		E3FA787C299975C30046B7D1 /* SearchResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = E3FA787B299975C30046B7D1 /* SearchResponse.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -32,6 +33,7 @@
 		E385D23429994C3700993556 /* NetworkingManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkingManager.swift; sourceTree = "<group>"; };
 		E3FA7877299956210046B7D1 /* Constants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
 		E3FA78792999625F0046B7D1 /* WeatherResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WeatherResponse.swift; sourceTree = "<group>"; };
+		E3FA787B299975C30046B7D1 /* SearchResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchResponse.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -101,6 +103,7 @@
 			isa = PBXGroup;
 			children = (
 				E3FA78792999625F0046B7D1 /* WeatherResponse.swift */,
+				E3FA787B299975C30046B7D1 /* SearchResponse.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -267,6 +270,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				E3FA787C299975C30046B7D1 /* SearchResponse.swift in Sources */,
 				E3FA7878299956210046B7D1 /* Constants.swift in Sources */,
 				E3FA787A2999625F0046B7D1 /* WeatherResponse.swift in Sources */,
 				E385D233299949DE00993556 /* SavedWeathersViewController.swift in Sources */,

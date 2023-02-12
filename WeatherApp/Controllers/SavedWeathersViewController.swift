@@ -16,7 +16,13 @@ class SavedWeathersViewController: UIViewController {
         view.backgroundColor = UIColor(named: "BackgroundColor")
         
         NetworkingManager.shared.featchWeatherByCityName(cityName: "Kielce") { weather in
-            print(weather)
+            //print(weather)
+        }
+        
+        NetworkingManager.shared.searchForCities(cityName: "Vienna") { names in
+            for name in names {
+                print(name)
+            }
         }
     }
 }
