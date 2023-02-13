@@ -17,6 +17,8 @@
 		E3FA7878299956210046B7D1 /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = E3FA7877299956210046B7D1 /* Constants.swift */; };
 		E3FA787A2999625F0046B7D1 /* WeatherResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = E3FA78792999625F0046B7D1 /* WeatherResponse.swift */; };
 		E3FA787C299975C30046B7D1 /* SearchResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = E3FA787B299975C30046B7D1 /* SearchResponse.swift */; };
+		E3FA787E299991EC0046B7D1 /* SearchResultsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E3FA787D299991EC0046B7D1 /* SearchResultsViewController.swift */; };
+		E3FA788029999A6D0046B7D1 /* SearchResultsViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = E3FA787F29999A6D0046B7D1 /* SearchResultsViewModel.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -34,6 +36,8 @@
 		E3FA7877299956210046B7D1 /* Constants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
 		E3FA78792999625F0046B7D1 /* WeatherResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WeatherResponse.swift; sourceTree = "<group>"; };
 		E3FA787B299975C30046B7D1 /* SearchResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchResponse.swift; sourceTree = "<group>"; };
+		E3FA787D299991EC0046B7D1 /* SearchResultsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchResultsViewController.swift; sourceTree = "<group>"; };
+		E3FA787F29999A6D0046B7D1 /* SearchResultsViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchResultsViewModel.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -111,6 +115,7 @@
 		E381A21A2999447400F9D01F /* ViewModels */ = {
 			isa = PBXGroup;
 			children = (
+				E3FA787F29999A6D0046B7D1 /* SearchResultsViewModel.swift */,
 			);
 			path = ViewModels;
 			sourceTree = "<group>";
@@ -127,6 +132,7 @@
 			isa = PBXGroup;
 			children = (
 				E385D232299949DE00993556 /* SavedWeathersViewController.swift */,
+				E3FA787D299991EC0046B7D1 /* SearchResultsViewController.swift */,
 			);
 			path = Controllers;
 			sourceTree = "<group>";
@@ -271,6 +277,8 @@
 			buildActionMask = 2147483647;
 			files = (
 				E3FA787C299975C30046B7D1 /* SearchResponse.swift in Sources */,
+				E3FA787E299991EC0046B7D1 /* SearchResultsViewController.swift in Sources */,
+				E3FA788029999A6D0046B7D1 /* SearchResultsViewModel.swift in Sources */,
 				E3FA7878299956210046B7D1 /* Constants.swift in Sources */,
 				E3FA787A2999625F0046B7D1 /* WeatherResponse.swift in Sources */,
 				E385D233299949DE00993556 /* SavedWeathersViewController.swift in Sources */,

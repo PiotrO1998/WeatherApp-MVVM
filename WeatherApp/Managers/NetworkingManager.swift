@@ -7,6 +7,8 @@
 
 import Foundation
 import Alamofire
+import RxSwift
+import RxCocoa
 
 enum NetworkError: Error {
     case decodingError
@@ -34,28 +36,31 @@ final class NetworkingManager {
                 } else {
                     completion(.failure(.decodingError))
                 }
-            case .failure(_):
+            case let .failure(error):
+                print(error)
                 completion(.failure(.invalidData))
             }
         }
     }
     
-    func searchForCities(cityName: String, completion: @escaping ([SearchResponse]) -> ()) {
+    func searchForCities(with cityName: String, completion: @escaping ([SearchResponse]) -> ()) {
         
         let urlToFetch = Constants.urlForSearch + "\(cityName)" + "&limit=10" + Constants.apiKey
         
         Session.default.request(urlToFetch, method: .get).response { response in
-            //debugPrint(response)
+            debugPrint(response)
             
             switch response.result {
             case let .success(data):
-                let cities = try? JSONDecoder().decode([SearchResponse].self, from: data!)
-                if let cities = cities {
-                    completion(cities)
+                let response = try? JSONDecoder().decode([SearchResponse].self, from: data!)
+                
+                if let response = response {
+                    completion(response)
                 } else {
                     completion([])
                 }
-            case .failure(_):
+            case let .failure(error):
+                print(error)
                 completion([])
             }
         }
