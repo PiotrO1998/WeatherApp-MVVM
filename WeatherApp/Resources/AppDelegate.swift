@@ -23,6 +23,19 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         navVC.viewControllers.first?.navigationItem.largeTitleDisplayMode = .always
         window.rootViewController = navVC
         
+        if #available(iOS 13.0, *) {
+            let customNavBarAppearnace = UINavigationBarAppearance()
+            customNavBarAppearnace.configureWithOpaqueBackground()
+            customNavBarAppearnace.backgroundColor = UIColor(named: "BackgroundColor")
+            let apperance = UINavigationBar.appearance()
+            //apperance.scrollEdgeAppearance = customNavBarAppearnace
+            apperance.compactAppearance = customNavBarAppearnace
+            apperance.standardAppearance = customNavBarAppearnace
+        } else {
+            UINavigationBar().backgroundColor = UIColor(named: "BackgroundColor")
+            UINavigationBar().tintColor = UIColor(named: "BackgroundColor")
+        }
+        
         window.makeKeyAndVisible()
         self.window = window
         

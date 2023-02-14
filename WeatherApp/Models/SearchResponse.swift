@@ -9,6 +9,6 @@ import Foundation
 
 struct SearchResponse: Decodable {
     let name: String
-    let country: String
     let state: String?
+    let country: String
 }

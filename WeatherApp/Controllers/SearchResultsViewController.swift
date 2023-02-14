@@ -9,7 +9,13 @@ import UIKit
 import RxSwift
 import RxCocoa
 
+protocol SearchResultsViewControllerDelegate: AnyObject {
+    func showResult(controller: UIViewController)
+}
+
 class SearchResultsViewController: UIViewController {
+    
+    weak var delegate: SearchResultsViewControllerDelegate?
     
     private var searchResultsViewModel = SearchResultsViewModel()
     private var disposeBag = DisposeBag()
@@ -51,7 +57,8 @@ extension SearchResultsViewController {
         }.disposed(by: disposeBag)
         
         tableView.rx.modelSelected(SearchResponse.self).bind { response in
-            print(response.name)
+            let vc = WeatherViewController(searchResponse: SearchResponse(name: response.name, state: response.state, country: response.country))
+            self.delegate?.showResult(controller: vc)
         }.disposed(by: disposeBag)
     }
 }

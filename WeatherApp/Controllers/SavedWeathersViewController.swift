@@ -20,7 +20,7 @@ class SavedWeathersViewController: UIViewController, UISearchResultsUpdating {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        title = "Weathers"
+        title = "Weather"
         view.backgroundColor = UIColor(named: "BackgroundColor")
         searchController.searchResultsUpdater = self
         navigationItem.searchController = searchController
@@ -28,7 +28,6 @@ class SavedWeathersViewController: UIViewController, UISearchResultsUpdating {
 }
 
 // MARK: - SearchBar Methods
-
 extension SavedWeathersViewController {
     func updateSearchResults(for searchController: UISearchController) {
         guard let searchResultsVC = searchController.searchResultsController as? SearchResultsViewController,
@@ -36,8 +35,15 @@ extension SavedWeathersViewController {
               !query.trimmingCharacters(in: .whitespaces).isEmpty else {
                   return
               }
-        print(query)
         
+        searchResultsVC.delegate = self
         searchResultsVC.search(with: query)
+    }
+}
+
+// MARK: - conforming to SearchResultsViewControllerDelegate
+extension SavedWeathersViewController: SearchResultsViewControllerDelegate {
+    func showResult(controller: UIViewController) {
+        navigationController?.pushViewController(controller, animated: true)
     }
 }
