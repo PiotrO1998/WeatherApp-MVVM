@@ -65,11 +65,22 @@ class WeatherViewController: UIViewController {
                         self.tableView.reloadData()
                     case .failure(let error):
                         print(error)
+                        
+                        let alert = UIAlertController(title: "Sorry", message: "There were an issue fetching weather for this place", preferredStyle: .alert)
+                        alert.addAction(UIAlertAction(title: NSLocalizedString("OK", comment: "Default action"), style: .default, handler: { _ in
+                            self.navigationController?.popToRootViewController(animated: true)
+                        }))
+                        self.present(alert, animated: true, completion: nil)
                     }
                 }
                 
             case .failure(let error):
                 print(error)
+                let alert = UIAlertController(title: "Sorry", message: "There were an issue fetching weather for this place", preferredStyle: .alert)
+                alert.addAction(UIAlertAction(title: NSLocalizedString("OK", comment: "Default action"), style: .default, handler: { _ in
+                    self.navigationController?.popToRootViewController(animated: true)
+                }))
+                self.present(alert, animated: true, completion: nil)
             }
         }
     }

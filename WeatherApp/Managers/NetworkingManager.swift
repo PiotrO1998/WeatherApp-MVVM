@@ -44,7 +44,7 @@ final class NetworkingManager {
                     completion(.failure(.decodingError))
                 }
             case let .failure(error):
-                print(error)
+                //print(error)
                 completion(.failure(.invalidData))
             }
         }
@@ -96,7 +96,7 @@ final class NetworkingManager {
                     completion(.failure(.decodingError))
                 }
             case let .failure(error):
-                print(error)
+                //print(error)
                 completion(.failure(.invalidData))
             }
         }

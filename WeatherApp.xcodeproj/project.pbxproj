@@ -14,6 +14,7 @@
 		E381A212299942B700F9D01F /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = E381A210299942B700F9D01F /* LaunchScreen.storyboard */; };
 		E385D233299949DE00993556 /* SavedWeathersViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E385D232299949DE00993556 /* SavedWeathersViewController.swift */; };
 		E385D23529994C3700993556 /* NetworkingManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = E385D23429994C3700993556 /* NetworkingManager.swift */; };
+		E38C6FE3299D4F7B00DD9593 /* ViewControllerExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = E38C6FE2299D4F7B00DD9593 /* ViewControllerExtension.swift */; };
 		E3FA7878299956210046B7D1 /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = E3FA7877299956210046B7D1 /* Constants.swift */; };
 		E3FA787A2999625F0046B7D1 /* WeatherResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = E3FA78792999625F0046B7D1 /* WeatherResponse.swift */; };
 		E3FA787C299975C30046B7D1 /* SearchResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = E3FA787B299975C30046B7D1 /* SearchResponse.swift */; };
@@ -41,6 +42,7 @@
 		E381A213299942B700F9D01F /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		E385D232299949DE00993556 /* SavedWeathersViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SavedWeathersViewController.swift; sourceTree = "<group>"; };
 		E385D23429994C3700993556 /* NetworkingManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkingManager.swift; sourceTree = "<group>"; };
+		E38C6FE2299D4F7B00DD9593 /* ViewControllerExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewControllerExtension.swift; sourceTree = "<group>"; };
 		E3FA7877299956210046B7D1 /* Constants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
 		E3FA78792999625F0046B7D1 /* WeatherResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WeatherResponse.swift; sourceTree = "<group>"; };
 		E3FA787B299975C30046B7D1 /* SearchResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchResponse.swift; sourceTree = "<group>"; };
@@ -106,6 +108,7 @@
 		E381A204299942B600F9D01F /* WeatherApp */ = {
 			isa = PBXGroup;
 			children = (
+				E38C6FE1299D4F4600DD9593 /* Extensions */,
 				E3FA7876299956040046B7D1 /* Utils */,
 				E381A21F2999476000F9D01F /* Resources */,
 				E381A21D299944B000F9D01F /* Managers */,
@@ -176,6 +179,14 @@
 				E381A207299942B600F9D01F /* SceneDelegate.swift */,
 			);
 			path = Resources;
+			sourceTree = "<group>";
+		};
+		E38C6FE1299D4F4600DD9593 /* Extensions */ = {
+			isa = PBXGroup;
+			children = (
+				E38C6FE2299D4F7B00DD9593 /* ViewControllerExtension.swift */,
+			);
+			path = Extensions;
 			sourceTree = "<group>";
 		};
 		E3FA7876299956040046B7D1 /* Utils */ = {
@@ -302,6 +313,7 @@
 			files = (
 				E3FA787C299975C30046B7D1 /* SearchResponse.swift in Sources */,
 				E3FA788A299AEB740046B7D1 /* ForecastWeatherModel.swift in Sources */,
+				E38C6FE3299D4F7B00DD9593 /* ViewControllerExtension.swift in Sources */,
 				E3FA7888299AC8B00046B7D1 /* WeatherViewModel.swift in Sources */,
 				E3FA78822999C4AF0046B7D1 /* WeatherViewController.swift in Sources */,
 				E3FA787E299991EC0046B7D1 /* SearchResultsViewController.swift in Sources */,
