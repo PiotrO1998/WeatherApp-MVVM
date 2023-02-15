@@ -39,10 +39,6 @@ struct Constants {
         
         let dateFormatterTwo = DateFormatter()
         dateFormatterTwo.dateFormat = "HH:mm"
-        
-      
-        print(dateFormatterTwo.string(from: date!))
-        
         return dateFormatterTwo.string(from: date!)
     }
     

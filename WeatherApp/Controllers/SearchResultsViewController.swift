@@ -10,7 +10,7 @@ import RxSwift
 import RxCocoa
 
 protocol SearchResultsViewControllerDelegate: AnyObject {
-    func showResult(controller: UIViewController)
+    func showResult(controller: WeatherViewController)
 }
 
 class SearchResultsViewController: UIViewController {

@@ -45,6 +45,7 @@ class ForecastWeatherTableViewCell: UITableViewCell {
     
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
+        contentView.addSubview(timeLabel)
         contentView.addSubview(temperatureLabel)
         contentView.addSubview(weatherIconImageView)
         
@@ -59,23 +60,19 @@ class ForecastWeatherTableViewCell: UITableViewCell {
     
     override func layoutSubviews() {
         super.layoutSubviews()
-        
-        weatherIconImageView.widthAnchor.constraint(equalToConstant: 50).isActive = true
-        weatherIconImageView.heightAnchor.constraint(equalToConstant: 50).isActive = true
-        
+         
         let stackView = UIStackView(arrangedSubviews: [timeLabel, weatherIconImageView, temperatureLabel])
         stackView.translatesAutoresizingMaskIntoConstraints = false
         stackView.axis = .horizontal
-        stackView.spacing = 20
-        stackView.distribution = .fillEqually
-        
+        stackView.spacing = 10
+        stackView.distribution = .fillProportionally
+        stackView.alignment = .center
         contentView.addSubview(stackView)
+        
         stackView.leftAnchor.constraint(equalTo: contentView.leftAnchor, constant: 10).isActive = true
         stackView.rightAnchor.constraint(equalTo: contentView.rightAnchor, constant: -10).isActive = true
         stackView.topAnchor.constraint(equalTo: contentView.topAnchor, constant: 10).isActive = true
         stackView.bottomAnchor.constraint(equalTo: contentView.bottomAnchor, constant: -10).isActive = true
-        
-        timeLabel.leftAnchor.constraint(equalTo: stackView.leftAnchor, constant: 20).isActive = true
         
         stackView.backgroundColor = UIColor(named: "BackgroundColor")
         stackView.layer.cornerRadius = 8

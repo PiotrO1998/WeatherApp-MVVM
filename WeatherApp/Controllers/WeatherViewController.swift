@@ -9,10 +9,15 @@ import UIKit
 import RxSwift
 import RxCocoa
 
+protocol SaveWeatherDelegate {
+    func weatherDidSave(viewModel: SavedWeatherViewModel)
+}
+
 class WeatherViewController: UIViewController {
     
     private let searchResponse: SearchResponse
     private var weatherViewModel: WeatherViewModel!
+    var deletegate: SaveWeatherDelegate?
     
     private let tableView: UITableView = {
         let tableView = UITableView()
@@ -41,6 +46,7 @@ class WeatherViewController: UIViewController {
         tableView.frame = view.bounds
         tableView.dataSource = self
         tableView.delegate = self
+        navigationItem.rightBarButtonItem = UIBarButtonItem(title: "Save", style: .plain, target: self, action: #selector(saveButtonTapped))
     }
     
     // Fetch Weather
@@ -67,8 +73,17 @@ class WeatherViewController: UIViewController {
             }
         }
     }
+    
+    @objc func saveButtonTapped() {
+        if let weatherViewModel = self.weatherViewModel {
+            let viewModel = SavedWeatherViewModel(weather: weatherViewModel.currentWeatherResponse, searchResponse: self.searchResponse)
+            deletegate?.weatherDidSave(viewModel: viewModel)
+            navigationController?.popToRootViewController(animated: true)
+        }
+    }
 }
 
+// MARK: - Table View Data Source methods
 extension WeatherViewController: UITableViewDataSource {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return self.weatherViewModel == nil ? 0 :
@@ -89,6 +104,7 @@ extension WeatherViewController: UITableViewDataSource {
     }
 }
 
+// MARK: - Table View Delegate methods
 extension WeatherViewController: UITableViewDelegate {
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         return 65
@@ -107,5 +123,6 @@ extension WeatherViewController: UITableViewDelegate {
         let header = tableView.dequeueReusableHeaderFooterView(withIdentifier: ForecastWeatherTableHeader.identifier) as? ForecastWeatherTableHeader
         header?.configure(self.weatherViewModel)
         return header
+        
     }
 }
