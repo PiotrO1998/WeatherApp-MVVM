@@ -18,4 +18,6 @@ class SearchResultsViewModel {
             self.searchResults.onNext(results)
         }
     }
+    
+    //func saveSearchResponse()
 }

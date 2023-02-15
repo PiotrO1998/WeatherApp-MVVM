@@ -6,6 +6,7 @@
 //
 
 import UIKit
+import RealmSwift
 
 @main
 class AppDelegate: UIResponder, UIApplicationDelegate {
@@ -38,6 +39,15 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         
         window.makeKeyAndVisible()
         self.window = window
+        
+        do {
+            let real = try Realm()
+        } catch {
+            print("Error initialisting new realm, \(error)")
+        }
+        
+        // locate Realm database
+        print(Realm.Configuration.defaultConfiguration.fileURL)
         
         return true
     }
