@@ -36,7 +36,9 @@ class SearchResultsViewModel {
         
         if let searchArray = searchArray {
             let result = searchArray.contains {
-                $0.name == searchToSave.name && $0.state == searchToSave.state && $0.country == searchToSave.country
+                $0.name == searchToSave.name &&
+                $0.state == searchToSave.state &&
+                $0.country == searchToSave.country
             }
             if result {
                 return
@@ -83,7 +85,6 @@ class SearchResultsViewModel {
             searchArray.forEach { savedSearch in
                 let state = savedSearch.state == "" ? nil : savedSearch.state
                 savedSearchResponse.append(SearchResponse(name: savedSearch.name, state: state, country: savedSearch.country))
-                print(savedSearchResponse.count)
             }
             self.searchResults.onNext(savedSearchResponse)
         }

@@ -21,6 +21,10 @@ class SavedWeathersViewModel {
     func modelAt(_ index: Int) -> SavedWeatherViewModel {
         return savedWeathersViewModel[index]
     }
+    
+    func removeViewModels() {
+        savedWeathersViewModel = [SavedWeatherViewModel]()
+    }
 }
 
 

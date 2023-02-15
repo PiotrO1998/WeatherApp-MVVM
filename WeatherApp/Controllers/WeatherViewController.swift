@@ -23,7 +23,6 @@ class WeatherViewController: UIViewController {
         let tableView = UITableView()
         tableView.register(ForecastWeatherTableViewCell.self, forCellReuseIdentifier: ForecastWeatherTableViewCell.identifier)
         tableView.backgroundColor = UIColor(named: "BackgroundColor")
-        tableView.separatorStyle = .none
         tableView.register(ForecastWeatherTableHeader.self, forHeaderFooterViewReuseIdentifier: ForecastWeatherTableHeader.identifier)
         return tableView
     }()
@@ -46,7 +45,6 @@ class WeatherViewController: UIViewController {
         tableView.frame = view.bounds
         tableView.dataSource = self
         tableView.delegate = self
-        navigationItem.rightBarButtonItem = UIBarButtonItem(title: "Save", style: .plain, target: self, action: #selector(saveButtonTapped))
     }
     
     // Fetch Weather
@@ -63,6 +61,7 @@ class WeatherViewController: UIViewController {
                     case .success(let forecastWeather):
                         self.weatherViewModel.forecastWeatherResponse = forecastWeather.list
                         self.tableView.reloadData()
+                        self.setupSaveButton()
                     case .failure(let error):
                         print(error)
                         
@@ -85,11 +84,20 @@ class WeatherViewController: UIViewController {
         }
     }
     
+    private func setupSaveButton() {
+        if !weatherViewModel.checkIfWeatherSaved(searchResponse: searchResponse) {
+            navigationItem.rightBarButtonItem = UIBarButtonItem(title: "Save", style: .plain, target: self, action: #selector(saveButtonTapped))
+        } else {
+            navigationItem.rightBarButtonItem = nil
+        }
+    }
+    
     @objc func saveButtonTapped() {
         if let weatherViewModel = self.weatherViewModel {
             let viewModel = SavedWeatherViewModel(weather: weatherViewModel.currentWeatherResponse, searchResponse: self.searchResponse)
             deletegate?.weatherDidSave(viewModel: viewModel)
-            navigationController?.popToRootViewController(animated: true)
+            weatherViewModel.handleSaveUnsave(searchResponse: searchResponse)
+            setupSaveButton()
         }
     }
 }
@@ -134,6 +142,5 @@ extension WeatherViewController: UITableViewDelegate {
         let header = tableView.dequeueReusableHeaderFooterView(withIdentifier: ForecastWeatherTableHeader.identifier) as? ForecastWeatherTableHeader
         header?.configure(self.weatherViewModel)
         return header
-        
     }
 }

@@ -6,10 +6,12 @@
 //
 
 import UIKit
+import RealmSwift
 
 class SavedWeathersViewController: UIViewController {
     
     private let savedWeathersViewModel = SavedWeathersViewModel()
+    let realm  = try! Realm()
     
     let searchController: UISearchController = {
         let vc = UISearchController(searchResultsController: SearchResultsViewController())
@@ -23,6 +25,7 @@ class SavedWeathersViewController: UIViewController {
         let tableView = UITableView()
         tableView.register(SavedWeatherTableViewCell.self, forCellReuseIdentifier: SavedWeatherTableViewCell.identifier)
         tableView.backgroundColor = UIColor(named: "BackgroundColor")
+        tableView.separatorColor = .black
         return tableView
     }()
     
@@ -36,11 +39,37 @@ class SavedWeathersViewController: UIViewController {
         tableView.frame = view.bounds
         tableView.dataSource = self
         tableView.delegate = self
+        fetchSavedWeathers()
     }
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         tableView.reloadData()
+    }
+    
+    private func fetchSavedWeathers() {
+        var savedWeathers: Results<WeatherToSave>?
+        savedWeathers = realm.objects(WeatherToSave.self)
+        
+        if let savedWeathers = savedWeathers {
+            print("SAVED WEATHER CPUNT: \(savedWeathers.count)")
+            savedWeathers.forEach { savedWeather in
+                print("SAVED WEATHER: \(savedWeather)")
+                let state = savedWeather.state == "" ? nil : savedWeather.state
+                NetworkingManager.shared.featchWeather(cityName: savedWeather.name, stateCode: state, countryCode: savedWeather.country) { result in
+                    
+                    switch result {
+                    case .success(let weather):
+                        print(weather)
+                        let savedWeatherViewModel = SavedWeatherViewModel(weather: weather, searchResponse: SearchResponse(name: savedWeather.name, state: state, country: savedWeather.country))
+                        self.savedWeathersViewModel.addSavedWeatherViewModel(savedWeatherViewModel)
+                        self.tableView.reloadData()
+                    case .failure(let error):
+                        print(error)
+                    }
+                }
+            }
+        }
     }
 }
 
@@ -100,12 +129,25 @@ extension SavedWeathersViewController: UITableViewDelegate {
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        print("tap")
         let viewModel = self.savedWeathersViewModel.modelAt(indexPath.row)
         
         let vc = WeatherViewController(searchResponse: viewModel.searchResponse)
         navigationController?.pushViewController(vc, animated: true)
+    }
+    
+    func tableView(_ tableView: UITableView, trailingSwipeActionsConfigurationForRowAt indexPath: IndexPath) -> UISwipeActionsConfiguration? {
+        let deleteAction = UIContextualAction(style: .destructive, title: "Delete") { (contextualAction, view, boolValue) in
+            
+            
+        }
         
+        if #available(iOS 13.0, *) {
+            deleteAction.image = UIImage(systemName: "trash")
+        }
+        
+        let swipeActions = UISwipeActionsConfiguration(actions: [deleteAction])
+        
+        return swipeActions
     }
 }
 

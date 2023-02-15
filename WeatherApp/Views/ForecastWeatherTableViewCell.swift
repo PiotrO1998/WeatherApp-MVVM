@@ -45,10 +45,6 @@ class ForecastWeatherTableViewCell: UITableViewCell {
     
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
-        contentView.addSubview(timeLabel)
-        contentView.addSubview(temperatureLabel)
-        contentView.addSubview(weatherIconImageView)
-        
         self.backgroundColor = .clear
         self.selectionStyle = .none
         self.isUserInteractionEnabled = false
@@ -60,27 +56,40 @@ class ForecastWeatherTableViewCell: UITableViewCell {
     
     override func layoutSubviews() {
         super.layoutSubviews()
-         
-        let stackView = UIStackView(arrangedSubviews: [timeLabel, weatherIconImageView, temperatureLabel])
-        stackView.translatesAutoresizingMaskIntoConstraints = false
-        stackView.axis = .horizontal
-        stackView.spacing = 10
-        stackView.distribution = .fillProportionally
-        stackView.alignment = .center
-        contentView.addSubview(stackView)
         
-        stackView.leftAnchor.constraint(equalTo: contentView.leftAnchor, constant: 10).isActive = true
-        stackView.rightAnchor.constraint(equalTo: contentView.rightAnchor, constant: -10).isActive = true
-        stackView.topAnchor.constraint(equalTo: contentView.topAnchor, constant: 10).isActive = true
-        stackView.bottomAnchor.constraint(equalTo: contentView.bottomAnchor, constant: -10).isActive = true
+        let containerView = UIView(frame: CGRect(x: 10, y: 0, width: contentView.frame.width-20, height: contentView.frame.height-20))
+        contentView.addSubview(containerView)
+        containerView.translatesAutoresizingMaskIntoConstraints = false
         
-        stackView.backgroundColor = UIColor(named: "BackgroundColor")
-        stackView.layer.cornerRadius = 8
-        stackView.layer.masksToBounds = false
-        stackView.layer.shadowOffset = CGSizeMake(0, 3)
-        stackView.layer.shadowColor = UIColor.black.cgColor
-        stackView.layer.shadowOpacity = 0.23
-        stackView.layer.shadowRadius = 4
+        containerView.leftAnchor.constraint(equalTo: contentView.leftAnchor, constant: 10).isActive = true
+        containerView.rightAnchor.constraint(equalTo: contentView.rightAnchor, constant: -10).isActive = true
+        containerView.topAnchor.constraint(equalTo: contentView.topAnchor, constant: 10).isActive = true
+        containerView.bottomAnchor.constraint(equalTo: contentView.bottomAnchor, constant: -10).isActive = true
+        
+        contentView.addSubview(timeLabel)
+        contentView.addSubview(temperatureLabel)
+        contentView.addSubview(weatherIconImageView)
+        
+        timeLabel.centerYAnchor.constraint(equalTo: containerView.centerYAnchor).isActive = true
+        timeLabel.leftAnchor.constraint(equalTo: containerView.leftAnchor, constant: 40).isActive = true
+        
+        temperatureLabel.centerYAnchor.constraint(equalTo: containerView.centerYAnchor).isActive = true
+        temperatureLabel.rightAnchor.constraint(equalTo: containerView.rightAnchor, constant: -40).isActive = true
+        
+        weatherIconImageView.heightAnchor.constraint(equalToConstant: containerView.frame.size.height/1.5).isActive = true
+        weatherIconImageView.widthAnchor.constraint(equalToConstant: containerView.frame.size.height/1.5).isActive = true
+        weatherIconImageView.centerYAnchor.constraint(equalTo: containerView.centerYAnchor).isActive = true
+        weatherIconImageView.centerXAnchor.constraint(equalTo: containerView.centerXAnchor).isActive = true
+        
+        containerView.backgroundColor = UIColor(named: "BackgroundColor")
+        containerView.layer.cornerRadius = 8
+        containerView.layer.masksToBounds = false
+        containerView.layer.shadowOffset = CGSizeMake(0, 3)
+        containerView.layer.shadowColor = UIColor.black.cgColor
+        containerView.layer.shadowOpacity = 0.23
+        containerView.layer.shadowRadius = 4
+        
+        
     }
     
     override func prepareForReuse() {
