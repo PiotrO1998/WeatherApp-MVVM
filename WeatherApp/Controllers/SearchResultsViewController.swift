@@ -30,17 +30,18 @@ class SearchResultsViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
-        view.backgroundColor = .clear
         view.addSubview(tableView)
         tableView.frame = view.bounds
         bindTableData()
     }
     
     func search(with query: String) {
-        searchResultsViewModel.search(with: query)
+        if query == "" {
+            searchResultsViewModel.fetchSavedResults()
+        } else {
+            searchResultsViewModel.search(with: query)
+        }
     }
-    
 }
 
 // MARK: - Binding
@@ -57,7 +58,9 @@ extension SearchResultsViewController {
         }.disposed(by: disposeBag)
         
         tableView.rx.modelSelected(SearchResponse.self).bind { response in
-            let vc = WeatherViewController(searchResponse: SearchResponse(name: response.name, state: response.state, country: response.country))
+            let searchResponse = SearchResponse(name: response.name, state: response.state, country: response.country)
+            self.searchResultsViewModel.saveSearchResponse(search: searchResponse)
+            let vc = WeatherViewController(searchResponse: searchResponse)
             self.delegate?.showResult(controller: vc)
         }.disposed(by: disposeBag)
     }

@@ -47,14 +47,18 @@ class SavedWeathersViewController: UIViewController {
 // MARK: - SearchBar Methods
 extension SavedWeathersViewController: UISearchResultsUpdating {
     func updateSearchResults(for searchController: UISearchController) {
-        guard let searchResultsVC = searchController.searchResultsController as? SearchResultsViewController,
-              let query = searchController.searchBar.text,
-              !query.trimmingCharacters(in: .whitespaces).isEmpty else {
-                  return
-              }
+        guard let searchResultsVC = searchController.searchResultsController as? SearchResultsViewController
+        else {
+            return
+        }
         
-        searchResultsVC.delegate = self
-        searchResultsVC.search(with: query)
+        searchController.searchResultsController?.view.isHidden = false
+        let query = searchController.searchBar.text
+        
+        if let query = query {
+            searchResultsVC.delegate = self
+            searchResultsVC.search(with: query)
+        }
     }
 }
 
