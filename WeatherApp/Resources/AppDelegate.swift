@@ -41,13 +41,13 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         self.window = window
         
         do {
-            let real = try Realm()
+            let _ = try Realm()
         } catch {
             print("Error initialisting new realm, \(error)")
         }
         
         // locate Realm database
-        print(Realm.Configuration.defaultConfiguration.fileURL)
+        // print(Realm.Configuration.defaultConfiguration.fileURL)
         
         return true
     }

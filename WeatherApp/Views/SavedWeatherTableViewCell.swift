@@ -121,7 +121,7 @@ class SavedWeatherTableViewCell: UITableViewCell {
     }
     
     func configure(_ viewModel: SavedWeatherViewModel) {
-        self.cityLabel.text = viewModel.city
+        self.cityLabel.text = viewModel.name
         self.temperatureLabel.text = viewModel.temperature
         self.conditionLabel.text = viewModel.condition
         self.iconString = viewModel.iconString

@@ -49,18 +49,15 @@ class SavedWeathersViewController: UIViewController {
     
     private func fetchSavedWeathers() {
         var savedWeathers: Results<WeatherToSave>?
-        savedWeathers = realm.objects(WeatherToSave.self)
+        savedWeathers = realm.objects(WeatherToSave.self).sorted(byKeyPath: "dateCreated", ascending: true)
         
         if let savedWeathers = savedWeathers {
-            print("SAVED WEATHER CPUNT: \(savedWeathers.count)")
             savedWeathers.forEach { savedWeather in
-                print("SAVED WEATHER: \(savedWeather)")
                 let state = savedWeather.state == "" ? nil : savedWeather.state
-                NetworkingManager.shared.featchWeather(cityName: savedWeather.name, stateCode: state, countryCode: savedWeather.country) { result in
-                    
+                NetworkingManager.shared.fetchWeather(cityName: savedWeather.name, stateCode: state, countryCode: savedWeather.country) { result in
                     switch result {
                     case .success(let weather):
-                        print(weather)
+                        let state = savedWeather.state == "" ? nil : savedWeather.state
                         let savedWeatherViewModel = SavedWeatherViewModel(weather: weather, searchResponse: SearchResponse(name: savedWeather.name, state: state, country: savedWeather.country))
                         self.savedWeathersViewModel.addSavedWeatherViewModel(savedWeatherViewModel)
                         self.tableView.reloadData()
@@ -102,7 +99,6 @@ extension SavedWeathersViewController: SearchResultsViewControllerDelegate {
 
 // MARK: - Table View Data Source methods
 extension SavedWeathersViewController: UITableViewDataSource {
-    
     func numberOfSections(in tableView: UITableView) -> Int {
         return 1
     }
@@ -137,8 +133,8 @@ extension SavedWeathersViewController: UITableViewDelegate {
     
     func tableView(_ tableView: UITableView, trailingSwipeActionsConfigurationForRowAt indexPath: IndexPath) -> UISwipeActionsConfiguration? {
         let deleteAction = UIContextualAction(style: .destructive, title: "Delete") { (contextualAction, view, boolValue) in
-            
-            
+            self.savedWeathersViewModel.removeSavedWeatherViewModel(at: indexPath.row)
+            self.tableView.reloadData()
         }
         
         if #available(iOS 13.0, *) {

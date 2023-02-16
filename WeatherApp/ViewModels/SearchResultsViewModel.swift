@@ -78,7 +78,7 @@ class SearchResultsViewModel {
     
     func fetchSavedResults() {
         var searchArray: Results<SearchResponseToSave>?
-        searchArray = realm.objects(SearchResponseToSave.self)
+        searchArray = realm.objects(SearchResponseToSave.self).sorted(byKeyPath: "dateCreated", ascending: false)
         
         if let searchArray = searchArray {
             var savedSearchResponse = [SearchResponse]()

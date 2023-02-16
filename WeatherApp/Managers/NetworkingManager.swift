@@ -20,7 +20,7 @@ final class NetworkingManager {
     
     private init() {}
     
-    func featchWeather(cityName: String, stateCode: String?, countryCode: String, completion: @escaping (Result<WeatherResponse, NetworkError>) -> ()) {
+    func fetchWeather(cityName: String, stateCode: String?, countryCode: String, completion: @escaping (Result<WeatherResponse, NetworkError>) -> ()) {
         
         var fetchWeatherWith = ""
         if let stateCode = stateCode {
@@ -44,7 +44,7 @@ final class NetworkingManager {
                     completion(.failure(.decodingError))
                 }
             case let .failure(error):
-                //print(error)
+                print(error)
                 completion(.failure(.invalidData))
             }
         }
@@ -96,7 +96,7 @@ final class NetworkingManager {
                     completion(.failure(.decodingError))
                 }
             case let .failure(error):
-                //print(error)
+                print(error)
                 completion(.failure(.invalidData))
             }
         }

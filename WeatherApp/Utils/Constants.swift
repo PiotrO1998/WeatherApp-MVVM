@@ -6,6 +6,7 @@
 //
 
 import Foundation
+import RealmSwift
 
 struct Constants {
     
@@ -42,6 +43,21 @@ struct Constants {
         return dateFormatterTwo.string(from: date!)
     }
     
+    static func checkIfWeatherSaved(id: Int) -> Bool {
+        let realm  = try! Realm()
+        
+        var savedWeathers: Results<WeatherToSave>?
+        savedWeathers = realm.objects(WeatherToSave.self)
+        
+        if let savedWeathers = savedWeathers {
+            let result = savedWeathers.contains {
+                $0.id == "\(id)"
+            }
+            return result
+        }
+        return true
+    }
+    
     struct Urls {
         static let baseURL = "https://api.openweathermap.org/data/2.5/weather?"
         static let urlForSearch = "https://api.openweathermap.org/geo/1.0/direct?"
@@ -52,10 +68,6 @@ struct Constants {
             let url = "https://openweathermap.org/img/wn/\(conditionCode)@2x.png"
             return url
         }
-    }
-    
-    
+    } 
 }
 
-
-//api.openweathermap.org/data/2.5/forecast?q={city name}&appid={API key}

@@ -49,12 +49,12 @@ class WeatherViewController: UIViewController {
     
     // Fetch Weather
     private func fetchWeather(with data: SearchResponse) {
-        NetworkingManager.shared.featchWeather (cityName: data.name, stateCode: data.state, countryCode: data.country) { results in
+        NetworkingManager.shared.fetchWeather (cityName: data.name, stateCode: data.state, countryCode: data.country) { results in
             
             switch results {
             case .success(let currentWeather):
                 self.weatherViewModel = WeatherViewModel(currentWeatherResponse: currentWeather)
-                self.title = self.weatherViewModel.city
+                self.title = self.weatherViewModel.name
                 NetworkingManager.shared.fetchForecastWeather (cityName: data.name, stateCode: data.state, countryCode: data.country) { results in
                     
                     switch results {
@@ -85,7 +85,7 @@ class WeatherViewController: UIViewController {
     }
     
     private func setupSaveButton() {
-        if !weatherViewModel.checkIfWeatherSaved(searchResponse: searchResponse) {
+        if !Constants.checkIfWeatherSaved(id: weatherViewModel.id) {
             navigationItem.rightBarButtonItem = UIBarButtonItem(title: "Save", style: .plain, target: self, action: #selector(saveButtonTapped))
         } else {
             navigationItem.rightBarButtonItem = nil
@@ -96,7 +96,6 @@ class WeatherViewController: UIViewController {
         if let weatherViewModel = self.weatherViewModel {
             let viewModel = SavedWeatherViewModel(weather: weatherViewModel.currentWeatherResponse, searchResponse: self.searchResponse)
             deletegate?.weatherDidSave(viewModel: viewModel)
-            weatherViewModel.handleSaveUnsave(searchResponse: searchResponse)
             setupSaveButton()
         }
     }

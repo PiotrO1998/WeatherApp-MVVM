@@ -76,8 +76,8 @@ class ForecastWeatherTableViewCell: UITableViewCell {
         temperatureLabel.centerYAnchor.constraint(equalTo: containerView.centerYAnchor).isActive = true
         temperatureLabel.rightAnchor.constraint(equalTo: containerView.rightAnchor, constant: -40).isActive = true
         
-        weatherIconImageView.heightAnchor.constraint(equalToConstant: containerView.frame.size.height/1.5).isActive = true
-        weatherIconImageView.widthAnchor.constraint(equalToConstant: containerView.frame.size.height/1.5).isActive = true
+        weatherIconImageView.heightAnchor.constraint(equalToConstant: containerView.frame.size.height/1.1).isActive = true
+        weatherIconImageView.widthAnchor.constraint(equalToConstant: containerView.frame.size.height/1.1).isActive = true
         weatherIconImageView.centerYAnchor.constraint(equalTo: containerView.centerYAnchor).isActive = true
         weatherIconImageView.centerXAnchor.constraint(equalTo: containerView.centerXAnchor).isActive = true
         
