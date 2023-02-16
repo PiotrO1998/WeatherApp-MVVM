@@ -24,6 +24,7 @@ class WeatherViewController: UIViewController {
         tableView.register(ForecastWeatherTableViewCell.self, forCellReuseIdentifier: ForecastWeatherTableViewCell.identifier)
         tableView.backgroundColor = UIColor(named: "BackgroundColor")
         tableView.register(ForecastWeatherTableHeader.self, forHeaderFooterViewReuseIdentifier: ForecastWeatherTableHeader.identifier)
+        tableView.separatorStyle = .none
         return tableView
     }()
     
