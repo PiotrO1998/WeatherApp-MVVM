@@ -25,6 +25,10 @@ struct WeatherViewModel {
         return String(format: "%.1f°", currentWeatherResponse.main.temp)
     }
     
+    var currentTemperatureDouble: Double {
+        return currentWeatherResponse.main.temp
+    }
+    
     var currentCondition: String {
         return currentWeatherResponse.weather[0].description
     }

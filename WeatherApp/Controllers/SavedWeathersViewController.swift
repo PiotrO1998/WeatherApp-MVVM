@@ -82,6 +82,10 @@ extension SavedWeathersViewController: UISearchResultsUpdating {
         let query = searchController.searchBar.text
         
         if let query = query {
+            if !savedWeathersViewModel.validateQuery(query: query) {
+                print("Incorrect query")
+                return
+            }
             searchResultsVC.delegate = self
             searchResultsVC.search(with: query)
         }

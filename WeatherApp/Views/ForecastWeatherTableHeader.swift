@@ -107,5 +107,16 @@ class ForecastWeatherTableHeader: UITableViewHeaderFooterView {
         self.temperatureLabel.text = viewModel.currentTemperature
         self.conditionLabel.text = viewModel.currentCondition
         self.iconString = viewModel.currentWeatherIconString
+        
+        switch viewModel.currentTemperatureDouble {
+        case ..<10:
+            self.temperatureLabel.textColor = .blue
+        case 10...20:
+            self.temperatureLabel.textColor = .black
+        case 20...:
+            self.temperatureLabel.textColor = .red
+        default:
+            self.temperatureLabel.textColor = .orange
+        }
     }
 }

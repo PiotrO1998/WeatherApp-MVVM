@@ -88,7 +88,7 @@ class SavedWeatherTableViewCell: UITableViewCell {
         mainStackView.translatesAutoresizingMaskIntoConstraints = false
         mainStackView.axis = .vertical
         mainStackView.distribution = .fillEqually
-
+        
         contentView.addSubview(leftStackView)
         contentView.addSubview(rightStackView)
         contentView.addSubview(mainStackView)
@@ -106,7 +106,7 @@ class SavedWeatherTableViewCell: UITableViewCell {
         rightStackView.bottomAnchor.constraint(equalTo: mainStackView.bottomAnchor, constant: 0).isActive = true
         rightStackView.rightAnchor.constraint(equalTo: mainStackView.rightAnchor, constant: 0).isActive = true
         
-                
+        
         mainStackView.layer.zPosition = 0
         leftStackView.layer.zPosition = 1
         rightStackView.layer.zPosition = 1
@@ -125,5 +125,16 @@ class SavedWeatherTableViewCell: UITableViewCell {
         self.temperatureLabel.text = viewModel.temperature
         self.conditionLabel.text = viewModel.condition
         self.iconString = viewModel.iconString
+        
+        switch viewModel.temperatureDuble {
+        case ..<10:
+            self.temperatureLabel.textColor = .blue
+        case 10...20:
+            self.temperatureLabel.textColor = .black
+        case 20...:
+            self.temperatureLabel.textColor = .red
+        default:
+            self.temperatureLabel.textColor = .orange
+        }
     }
 }

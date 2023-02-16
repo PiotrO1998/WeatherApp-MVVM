@@ -118,6 +118,18 @@ extension WeatherViewController: UITableViewDataSource {
         cell.temperatureLabel.text = String(format: "%.1f", forecastWeather.main.temp)
         cell.iconString = forecastWeather.weather[0].icon
         
+        switch forecastWeather.main.temp {
+        case ..<10:
+            cell.temperatureLabel.textColor = .blue
+        case 10...20:
+            cell.temperatureLabel.textColor = .black
+        case 20...:
+            cell.temperatureLabel.textColor = .red
+        default:
+            cell.temperatureLabel.textColor = .orange
+        }
+        
+        
         return cell
     }
 }

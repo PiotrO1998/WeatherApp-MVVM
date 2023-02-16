@@ -80,8 +80,16 @@ class SavedWeathersViewModel {
             }
         }
     }
+    
+    func validateQuery(query: String) -> Bool {
+        let pattern = "^([a-zA-Z\\u0080-\\u024F]+(?:. |-| |'))*[a-zA-Z\\u0080-\\u024F]*$"
+        let range = query.range(of: pattern, options: .regularExpression)
+        if let _ = range {
+            return true
+        }
+        return false
+    }
 }
-
 
 class SavedWeatherViewModel {
     private let weather: WeatherResponse
@@ -98,6 +106,10 @@ class SavedWeatherViewModel {
     
     var temperature: String {
         return String(format: "%.1f°", weather.main.temp)
+    }
+    
+    var temperatureDuble: Double {
+        return weather.main.temp
     }
     
     var condition: String {

@@ -53,10 +53,10 @@ class SearchResultsViewModel {
             print("Error saving search, \(error)")
         }
         
-        checkIfNeedToDeleteItemFromRealm()
+        deleteItemIfMoreThanFiveSaved()
     }
     
-    func checkIfNeedToDeleteItemFromRealm() {
+    private func deleteItemIfMoreThanFiveSaved() {
         var searchArray: Results<SearchResponseToSave>?
         searchArray = realm.objects(SearchResponseToSave.self)
         
